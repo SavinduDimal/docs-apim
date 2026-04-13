@@ -74,7 +74,7 @@ Two key performance metrics were used to measure the performance of each test.
 - Token type: JWT
 - The operating system is Ubuntu 22.04
 - MySQL version in RDS instance is 8.0
-- Java version is Termurin JDK 21
+- Java version is Temurin JDK 21
 
 ### Performance test scripts
 
