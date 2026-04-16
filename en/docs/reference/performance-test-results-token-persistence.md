@@ -56,7 +56,7 @@ The following table shows the throughput values of different grant types for eac
   <tr>
     <th>Grant Type</th>
     <th>With Persistence</th>
-    <th>Without Persistence</th>
+    <th>Without Persistence<br>(Default since API-M 4.7.0)</th>
   </tr>
 </thead>
 <tbody>
@@ -81,7 +81,7 @@ The following table shows the throughput values of different grant types for eac
 **Key Observations**
 
 - The throughput has seen an increase in both Client Credentials and Refresh grant types. With tokens no longer persisted in the database for the Client Credentials grant, performance can scale freely until it encounters a bottleneck with CPU usage on the API Manager instance. Similarly, for the Refresh Token grant, the benefits of removing token persistence outweigh the increase in CPU requirements on the APIM instance for token generation.
-- Under the test conditions, there's a decrease in TPS for the Password grant. This is due to the fact that the refresh token being generated as a JWT, unlike the default scenario (when token persistence is enabled) where it's an Opaque token. Generating and signing a JWT requires more computing power, resulting in the CPU of the API Manager instance becoming a bottleneck despite reduced load on the database. However, this issue can be addressed by vertically scaling the API Manager instance, thereby increasing available CPU resources.
+- Under the test conditions, there's a decrease in TPS for the Password grant. This is due to the refresh token being generated as a JWT by default (without persistence), whereas when token persistence is enabled, it's an Opaque token. Generating and signing a JWT requires more computing power, resulting in the CPU of the API Manager instance becoming a bottleneck despite reduced load on the database. However, this issue can be addressed by vertically scaling the API Manager instance, thereby increasing available CPU resources.
 
 !!! note
     The tests for Refresh grant were carried out by immediately regenerating a new access token using the refresh token, without waiting for the original token to expire.
